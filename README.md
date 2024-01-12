@@ -11,6 +11,10 @@
 # INSTALLATION
 - Just run the main.py, there is nothing to install or anything. Its a simple requests + threading nuker
 
+- Known issue: breaks when running on any python version below 3.11.6, this is due to the nuker depending on the following patches in 3.11.6
+
+![image](https://github.com/infamouskoala/Koala-Nuker/assets/75808182/68c24570-af29-4c8d-992b-c35c0f60d122)
+
 # PREVIEW
 ![Alt text](img/image.png)
 ![Alt text](img/image-1.png)
