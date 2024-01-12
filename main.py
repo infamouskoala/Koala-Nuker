@@ -149,6 +149,7 @@ Choice: """, end="")
         guild_roles = loadroles(guildid)
         guild_channels = FetchChannels(guildid)
         print(f'{red}[!]{white} Nuker is ready, Press any key to launch.')
+        print(f"{red}[X]{white} If the nuker is crashing on this window, you're being rate limited")
         input()
         for channel in guild_channels:
             # t = threading.Thread(target=removechan, args=(channel['channel-id'],))
