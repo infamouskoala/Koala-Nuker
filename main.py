@@ -89,10 +89,10 @@ def sendmsgwithwebhook(message, id, token):
             print(f"webhook rate limit: {r.json()['retry_after']}")
             time.sleep(r.json()['retry_after'])
 
-def makeandspam(guild, channel_name, message):
-    channel_id = channel(guild, channel_name)
+def makeandspam(srvrid, chnlname, msgg):
+    channel_id = channel(srvrid, chnlname)
     webhook_id, webhook_token = webhook(channel_id)
-    sendmsgwithwebhook(message, webhook_id, webhook_token)
+    sendmsgwithwebhook(msgg, webhook_id, webhook_token)
 
 def makeroles(guild, name):
     while True:
