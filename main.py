@@ -163,7 +163,6 @@ Choice: """, end="")
             t.start()
         
         while True:
-            pings = pings+1
             colorchoirce = random.choice(colors)
             print(f"{colorchoirce}[KOALA NUKER]{white} Koala Nuker {colorchoirce}[KOALA NUKER]{white}", end="\r")
 
